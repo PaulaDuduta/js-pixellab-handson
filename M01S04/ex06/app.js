@@ -102,10 +102,102 @@ for (var i = 0; i < person.friends.length; i++) {
   }
 }
 
+//TEMA -->
+
+console.warn(
+  ` Afiseaza fraza: "Intre Dragos si Larry este o diferenta de xx ani. Intre Dragos si Steven... ", doar daca varsta prietenului este impara. `,
+);
+
+var message = '';
+for (var i = 0; i < person.friends.length; i++) {
+  var friend = person.friends[i];
+  var ageDiff = Math.abs(person.age - friend.age);
+
+  if (friend.age % 2 !== 0) {
+    message =
+      'Intre ' +
+      person.name +
+      ' si ' +
+      friend.name +
+      ' este o diferenta de ' +
+      ageDiff +
+      ' ani.';
+    console.log(message);
+  }
+}
+
+console.warn(
+  ` Folosind proprietatea length a arrayului skills si o bucla for, afiseaza in ordine inversa elementele arrayului skills. Atentie, va trebui sa numeri invers, de la length la 0.`,
+);
+for (var i = person.skills.length - 1; i >= 0; i--) {
+  var skill = person.skills[i];
+
+  console.log(skill);
+}
+
+console.warn(
+  `Folosind obiectul person si un for, afiseaza in consola skillurile pe care le are persoana `,
+);
+for (var i = 0; i < person.skills.length; i++) {
+  var skill = person.skills[i];
+
+  console.log(skill);
+}
+
+console.warn(`In mod similar, afiseaza skillurile care incep cu c `);
+for (var i = 0; i < person.skills.length; i++) {
+  var skill = person.skills[i];
+
+  // if (skill[0] === 'c') {
+  //   console.log(skill);
+  // }
+
+  if (skill.startsWith('c')) {
+    console.log(skill);
+  }
+}
+
+console.warn(
+  `Folosind un for afiseaza propozitia: "Numele de familie ale prietenilor mei sunt: xxx, xxx, xxx."`,
+);
+var message = 'Numele de familie ale prietenilor mei sunt: ';
+for (var i = 0; i < person.friends.length; i++) {
+  var friend = person.friends[i];
+  var punctuation = ', ';
+
+  if (i === person.friends.length - 1) {
+    punctuation = '.';
+  }
+
+  message += friend.surname + punctuation;
+}
+console.log(message);
+
+console.warn(
+  `Folosind un for, afiseaza numarul total de ani pe care il au persoanele din arrayul friends `,
+);
+var totalYears = 0;
+for (var i = 0; i < person.friends.length; i++) {
+  var friend = person.friends[i];
+
+  totalYears = totalYears + friend.age;
+}
+console.log(totalYears.toString());
+
+console.warn(
+  ` Afiseaza diferenta de varsta dintre persoana si prietenii din arrayul friends. `,
+);
+for (var i = 0; i < person.friends.length; i++) {
+  var friend = person.friends[i];
+  var ageDiff = Math.abs(person.age - friend.age);
+  console.log(ageDiff);
+}
+
+//<--TEMA
+
 console.warn(
   `Afiseaza fraza: "Intre Dragos si Larry este o diferenta de xx ani. Intre Dragos si Steven... ". Repeta pentru tot arrayul friends.`,
 );
-
 var message = '';
 for (var i = 0; i < person.friends.length; i++) {
   var friend = person.friends[i];
