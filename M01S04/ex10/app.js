@@ -127,15 +127,18 @@ console.log(message.trim());
 console.warn(
   ` Folosind metoda reverse si apoi forEach, afiseaza in ordine inversa elementele arrayului skills.`,
 );
-person.skills.reverse().forEach(function (skill) {
-  console.log(skill);
-});
+person.skills
+  .slice()
+  .reverse()
+  .forEach(function (skill) {
+    console.log(skill);
+  });
 
 //TEMA -->
 console.warn(
   `Folosind obiectul person si forEach, afiseaza in consola skillurile pe care le are persoana.`,
 );
-person.skills.reverse().forEach(function (skill) {
+person.skills.forEach(function (skill) {
   console.log(skill);
 });
 
