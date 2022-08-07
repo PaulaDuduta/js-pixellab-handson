@@ -15,3 +15,17 @@ function calculateSquareSurface(width) {
 
 console.warn(`Cu metoda noua calculeaza suprafata unui patrat de 4 pe 4.`);
 console.log(calculateSquareSurface(4));
+
+//TEMA -->
+
+console.warn(
+  `Creeaza un wrapper numit calculateRectangleSurface() pentru calculateSurface() care sa primeasca doi parametrii si sa calculeze suprafata unui dreptunghi. `,
+);
+function calculateRectangleSurface(width, height) {
+  return calculateSurface(width, height);
+}
+
+console.warn(`Cu metoda noua calculeaza suprafata unui dreptunghi de 8 pe 9. `);
+console.log(calculateRectangleSurface(8, 9));
+
+//<-- TEMA
