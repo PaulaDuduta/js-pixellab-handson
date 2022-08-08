@@ -39,7 +39,7 @@ function calculateSurface(width, length, height) {
       result = width * length;
       break;
     case 3:
-      result = (width * height + length * height) * 2;
+      result = (width * height + length * height + width * length) * 2;
       break;
     default:
       console.log('Invalid number of arguments.');
