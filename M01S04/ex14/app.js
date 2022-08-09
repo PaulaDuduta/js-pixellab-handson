@@ -82,24 +82,37 @@ var petAge = [];
 var oldestPetAge = 0;
 var oldestPetName = '';
 
-for (var i = 0; i < person.pets.length; i++) {
-  // petAge.push(person.pets[i].age);
-  // var maxAge = Math.max(...petAge);
-  // var pet = person.pets[i].age;
+// for (var i = 0; i < person.pets.length; i++) {
+//   // petAge.push(person.pets[i].age);
+//   // var maxAge = Math.max(...petAge);
+//   // var pet = person.pets[i].age;
 
-  // if (pet === maxAge) {
-  //   console.log(person.pets[i].name);
-  // }
+//   // if (pet === maxAge) {
+//   //   console.log(person.pets[i].name);
+//   // }
 
-  for (var j = person.pets.length - 1; j >= 0; j--) {
-    if (person.pets[i].age > person.pets[j].age) {
-      oldestPetName = person.pets[i].name;
-      oldestPetAge = person.pets[i].age;
+//   for (var j = person.pets.length - 1; j >= 0; j--) {
+//     if (person.pets[i].age > person.pets[j].age) {
+//       oldestPetName = person.pets[i].name;
+//       oldestPetAge = person.pets[i].age;
 
-      var ageDiff = Math.abs(personAge - oldestPetAge);
-    }
+//       var ageDiff = Math.abs(personAge - oldestPetAge);
+//     }
+//   }
+// }
+
+var maxAge = person.pets[0].age;
+var petName = person.pets[0].name;
+for (var i = 1; i < person.pets.length; i++) {
+  if (person.pets[i].age > maxAge) {
+    maxAge = person.pets[i].age;
+    petName = person.pets[i].name;
   }
 }
+
+console.log('Maxage = ' + maxAge);
+console.log('Petname = ' + petName);
+
 console.log(
   `${oldestPetName} este cel mai batran animal pe care il am, dar intre noi este o diferenta de ${ageDiff} ani.`,
 );

@@ -27,7 +27,7 @@ var person = {
 let ageDiff = 0;
 
 for (var i = 0; i < person.friends.length; i++) {
-  for (var j = person.friends.length - 1; j >= 0; j--) {
+  for (var j = person.friends.length - 1; j >= 0 /*&& j !== i*/; j--) {
     ageDiff = Math.abs(person.friends[i].age - person.friends[j].age);
 
     if (i !== j) {

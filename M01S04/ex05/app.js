@@ -24,14 +24,18 @@
 //   console.log(`Acest nr este multiplu de ${number}`);
 // }
 
-// var number = prompt('Introdu limita superioara');
-var number = 30;
+var number = prompt('Introdu limita superioara');
 for (var i = 2; i < number; i++) {
-  for (var z = 0; z < i; z++) {
-    if (z % i !== 0) {
-      console.log(z);
-      z++;
+  var isPrim = true;
+
+  for (var z = 2; z < i / 2; z++) {
+    if (i % z === 0) {
+      isPrim = false;
+      break;
     }
   }
-  // console.log(`${i} este nr prim`);
+
+  if (isPrim) {
+    console.log(`${i} este nr prim`);
+  }
 }
