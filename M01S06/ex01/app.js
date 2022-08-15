@@ -11,6 +11,8 @@ var car = {
   color: 'black',
   wheels: 4,
   speed: 50,
+  topSpeed: 160,
+  topReverseSpeed: -50,
   //flags:
   isTrunkOpen: false,
   areLightsOn: false,
@@ -26,7 +28,7 @@ var car = {
     this.isTrunkOpen = true;
   },
   closeTrunk: function () {
-    this.isTunkOpen = false;
+    this.isTrunkOpen = false;
   },
   turnLightsOn: function () {
     this.areLightsOn = true;
@@ -34,6 +36,7 @@ var car = {
   turnLightsOff: function () {
     this.areLightsOn = false;
   },
+
   flashLights: function () {
     this.turnLightsOn();
     //handling "this" keyword lost reference
@@ -44,4 +47,32 @@ var car = {
       self.turnLightsOff();
     }, 5000);
   },
+
+  stop: function () {
+    this.speed = 0;
+
+    console.log(this.speed);
+  },
+
+  setSpeed: function (actualSpeed) {
+    if (actualSpeed > this.topReverseSpeed && actualSpeed < this.topSpeed) {
+      this.speed = actualSpeed;
+    } else {
+      console.log(`Limite de viteza depasite.`);
+    }
+  },
+
+  decelerateSpeedByFiveUnits: function () {
+    console.log(
+      `Masina era marca ${this.make} si se deplasa cu ${this.speed} km/h.`,
+    );
+
+    for (var i = 0; i < 5; i++) {
+      this.decelerate();
+    }
+
+    console.log(`Viteza noua este ${this.speed} km/h.`);
+  },
 };
+
+// car.decelerateSpeedByFiveUnits();

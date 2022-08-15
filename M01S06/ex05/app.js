@@ -31,8 +31,13 @@
     });
 
     removeEventsButton.addEventListener('click', function () {
-      showButton.remove();
-      toggleButton.remove();
+      window.confirm(
+        'Are you sure you want to delete these buttons?',
+        (function () {
+          showButton.remove();
+          toggleButton.remove();
+        })(),
+      );
     });
   });
 
