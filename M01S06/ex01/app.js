@@ -74,5 +74,3 @@ var car = {
     console.log(`Viteza noua este ${this.speed} km/h.`);
   },
 };
-
-// car.decelerateSpeedByFiveUnits();
