@@ -30,14 +30,24 @@
       }
     });
 
+    // removeEventsButton.addEventListener('click', function () {
+    //   window.confirm(
+    //     'Are you sure you want to delete these buttons?',
+    //     (function () {
+    //       showButton.remove();
+    //       toggleButton.remove();
+    //     })(),
+    //   );
+    // });
+
     removeEventsButton.addEventListener('click', function () {
-      window.confirm(
+      const confirmed = window.confirm(
         'Are you sure you want to delete these buttons?',
-        (function () {
-          showButton.remove();
-          toggleButton.remove();
-        })(),
       );
+      if (confirmed) {
+        showButton.remove();
+        toggleButton.remove();
+      }
     });
   });
 
