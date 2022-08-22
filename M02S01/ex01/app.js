@@ -2,6 +2,8 @@ class Car {
   //v1-Angular style
   topSpeed = 160;
   isTrunkOpen = false;
+  areLightsOn = false;
+  flashCycles = 5;
 
   constructor(make, color, wheels, speed) {
     this.make = make;
@@ -48,6 +50,31 @@ class Car {
   closeTrunk() {
     this.isTrunkOpen = false;
   }
+
+  turnLightsOn() {
+    this.areLightsOn = true;
+
+    console.log('S-au aprins luminile');
+  }
+
+  turnLightsOff() {
+    this.areLightsOn = false;
+
+    console.log('S-au stins luminile');
+  }
+
+  flashLights() {
+    let self = this;
+    const interval = setInterval(function () {
+      setTimeout(function () {
+        self.turnLightsOn();
+      }, 1000);
+      setTimeout(function () {
+        self.turnLightsOff();
+      }, 2000);
+    }, 2000);
+    clearInterval(interval);
+  }
 }
 
 const audi = new Car('Audi', 'black', 4, 50);
@@ -57,6 +84,14 @@ console.warn(
 );
 const opel = new Car('Opel', 'red', 4, 3);
 
-console.warn(
-  `Adauga o metoda numita stop() care sa faca proprietatea speed 0, apoi afiseaza viteza.`,
-);
+const cars = [audi, opel];
+
+cars.forEach(function (car) {
+  console.log(
+    `Masina era marca ${car.make} si se deplasa cu ${car.speed} km/h.`,
+  );
+
+  console.log(`Viteza noua este ${car.speed - 5} km/h.`);
+});
+
+audi.flashLights();
