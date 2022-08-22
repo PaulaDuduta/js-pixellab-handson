@@ -34,3 +34,56 @@ $('<span>', {
 $('<h2>', {
   text: 'Mesaje',
 }).prependTo($container);
+
+$container.after(
+  $('<div>', {
+    class: 'navigation',
+    // text: 'x',
+  }),
+);
+
+$('.navigation').append(
+  $('<a>', {
+    text: 'primul link',
+    href: '/',
+    title: 'test',
+    class: 'nav-link',
+  }),
+);
+
+$('.navigation .nav-link')
+  .before(
+    $('<h2>', {
+      text: 'Navigatie',
+    }),
+  )
+  .prepend(
+    $('<sup>', {
+      text: 1,
+    }),
+  );
+
+$container.append(
+  $('<h1>', {
+    text: 'Invat jQuery',
+  }),
+);
+
+const $docs = $('<p>', {
+  text: 'Documentatia jQuery poate fi gasita ',
+});
+$docs
+  .append(
+    $('<a>', {
+      href: 'https://api.jquery.com/',
+      target: '_blank',
+      rel: 'noopener noreferrer',
+      text: 'aici',
+    }),
+  )
+  .append(
+    $('<span>', {
+      text: '.',
+    }),
+  )
+  .insertAfter($('.navigation'));
