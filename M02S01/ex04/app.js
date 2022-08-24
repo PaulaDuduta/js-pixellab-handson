@@ -1,11 +1,14 @@
 class Car {
+  areHazardsOn = false;
+  intervalId = -1;
+  isLightOn = false;
+
   constructor(positionX, positionY, color, capColor, wheelColor) {
     this.positionX = positionX;
     this.positionY = positionY;
     this.color = color;
     this.capColor = capColor;
     this.wheelColor = wheelColor;
-    this.areHazardsOn = true;
 
     // this.frame = document.createElement('div');
     this.frame = this.e('div');
@@ -64,12 +67,14 @@ class Car {
 
   turnLightOn() {
     this.lightFront.classList.add('light--on');
+    this.isLightOn = true;
 
     return this;
   }
 
   turnLightOff() {
     this.lightFront.classList.remove('light--on');
+    this.isLightOn = false;
 
     return this;
   }
@@ -112,26 +117,49 @@ class Car {
     return this;
   }
 
+  // toggleHazards() {
+  //   let self = this;
+
+  //   const interval = setInterval(function () {
+  //     setTimeout(function () {
+  //       self.turnLightOn();
+  //       self.engageBreak();
+  //     }, 1000);
+
+  //     setTimeout(function () {
+  //       self.turnLightOff();
+  //       self.disengageBreak();
+  //     }, 2000);
+  //   }, 2000);
+
+  //   setTimeout(function () {
+  //     clearInterval(interval);
+  //   }, 10000);
+
+  //   return this;
+  // }
+
   toggleHazards() {
-    let self = this;
+    if (this.areHazardsOn === true) {
+      clearInterval(this.intervalId);
+      this.areHazardsOn = false;
 
-    const interval = setInterval(function () {
-      setTimeout(function () {
-        self.turnLightOn();
-        self.engageBreak();
-      }, 1000);
+      if (this.isLightOn === true) {
+        this.lightFront.classList.add('light--on');
+      } else {
+        this.lightFront.classList.remove('light--on');
+      }
 
-      setTimeout(function () {
-        self.turnLightOff();
-        self.disengageBreak();
-      }, 2000);
-    }, 2000);
+      return;
+    }
 
-    setTimeout(function () {
-      clearInterval(interval);
-    }, 10000);
+    const self = this;
 
-    return this;
+    self.intervalId = setInterval(function () {
+      self.lightFront.classList.toggle('light--on');
+      self.lightBack.classList.toggle('light--on');
+    }, 1000);
+    self.areHazardsOn = true;
   }
 }
 
@@ -146,4 +174,4 @@ car03.changeTireColor('crimson');
 car03.changeCapColor('black');
 // car03.engageBreak();
 // car03.moveTo(100, 100);
-car02.toggleHazards();
+car03.toggleHazards();
