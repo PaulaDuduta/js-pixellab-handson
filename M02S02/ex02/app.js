@@ -93,6 +93,12 @@ const renderPetUl = (petName) => {
   petInput.name = `pet_${petName.replaceAll(' ', '')}`;
   petInput.value = petName;
   petLi.append(petInput);
+  const removePetButton = document.createElement('button');
+  removePetButton.innerText = '-';
+  removePetButton.title = 'Remove pet';
+  removePetButton.type = 'button';
+  removePetButton.classList.add('removePetButton'); //also removePetButton className = 'removePetButton'
+  petLi.append(removePetButton);
 
   ul.append(petLi);
 
@@ -103,6 +109,16 @@ $(function () {
   //form submission step
   const $form = $('#personForm').on('submit', function () {
     event.preventDefault();
+    const petInput = this.petInput;
+    const petName = petInput.value;
+
+    if (petName.trim().length > 0) {
+      const petInputButton = petInput.nextElementSibling;
+      petInputButton.after(createPetPreview(petName));
+
+      petInput.value = '';
+    }
+
     //this -> pointer to the form
     //this.name -> pointer to the input
     person.name = this.name.value;
@@ -137,12 +153,11 @@ $(function () {
     $(this).after(render(person));
   });
 
-  $form.on('click', '.removeSkillButton', function () {
-    //this -> pointer catre buton
-    $(this).parent().remove();
-  });
-
   $form
+    .on('click', '.removeSkillButton', function () {
+      //this -> pointer catre buton
+      $(this).parent().remove();
+    })
     .on('click', '.editSkillButton', function () {
       const $editSkillButton = $(this);
 
@@ -180,6 +195,28 @@ $(function () {
       $saveSkillButton.hide();
       $saveSkillButton.siblings('.cancelEditSkillButton').hide();
     });
+
+  //event delegation. DOM style
+  //acelasi lucru, dar pt comparatie cu API-ul jQ
+  $form[0].addEventListener('click', (event) => {
+    //in arrow functions nu avem acces la acel obiect this
+    //in arrow functions avem this-ul conectat de this-ul din contextul de afara
+    const button = event.target;
+    //diferenta dintre event.target si currentTarget = currentTarget este elementul pe care STA (form) event handlerul
+    //iar target, este elementul de pe care evenimentul a plecat
+    //la event delegation se utilizeaza event.target
+    if (
+      button.nodeName !== 'BUTTON' ||
+      !button.classList.contains('removePetButton')
+    ) {
+      //early return
+      //daca tipul elementului masurat de nodeName nu este button si daca nu are clasa removePetButton
+      return;
+    }
+
+    //suntem pe butonul remove pet: ne ducem pe parinte, DOM style, si eliminam parintele
+    button.parentElement.remove();
+  });
 
   //create skills input step
   //form.descendenti-directii.al-doilea-fieldset
@@ -225,7 +262,26 @@ $(function () {
   petInput.placeholder = 'Pet';
   petInput.type = 'text';
   petInput.name = 'petInput';
+  petInput.addEventListener('keyup', (event) => {
+    event.stopPropagation();
+    const { key, currentTarget } = event;
+
+    if (key !== 'Enter') {
+      //early return
+      return;
+    }
+
+    //currentTarget => elementul pe care am pus event listenerul
+    //referinta din currentTarget se duce in petInput care este o variabila locala
+    const petInput = currentTarget;
+    const petName = petInput.value;
+
+    petInputButton.after(createPetPreview(petName));
+
+    petInput.value = '';
+  });
   petFieldset.append(petInput);
+
   const petInputButton = document.createElement('button');
   petInputButton.innerText = 'Add pet';
   petInputButton.title = 'Add pet';
@@ -235,16 +291,22 @@ $(function () {
     const petInput = petInputButton.previousElementSibling;
     const petName = petInput.value;
 
-    if (petName.length <= 0) {
-      return;
-    }
-
-    const ul = renderPetUl(petName);
-    petInputButton.after(ul);
+    //refactorizam event listener ca sa poata fi folosit si pe input + enter
+    createPetPreview(petName);
 
     petInput.value = '';
   });
   petFieldset.append(petInputButton);
+
+  //hoisting function functuons
+  function createPetPreview(petName) {
+    if (petName.length <= 0) {
+      return;
+    }
+
+    return renderPetUl(petName);
+    // petInputButton.after(ul);
+  }
 
   //hoisting function functions
   function render(person) {
